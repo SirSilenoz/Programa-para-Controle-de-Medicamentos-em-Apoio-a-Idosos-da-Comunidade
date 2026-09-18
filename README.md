@@ -10,16 +10,14 @@ Projeto de Extensão Universitária desenvolvido no **Centro Universitário Inte
 
 ## O problema
 
-Na etapa de levantamento (Atividade Extensionista I) foram entrevistados cuidadores e idosos de casas de apoio em Salvador. As dificuldades mais relatadas foram:
+O cuidado com a medicação de idosos em casas de apoio costuma esbarrar em alguns desafios recorrentes, especialmente em instituições com poucos funcionários e troca de plantão frequente:
 
-| Dificuldade relatada | % dos entrevistados |
-|---|---|
-| Falta de um controle para o cuidador saber o que já foi dado | 93% |
-| Esquecimento do horário exato do remédio | 87% |
-| Dificuldade para ler as informações nas caixas | 72% |
-| Confusão ao administrar múltiplos medicamentos | 65% |
+- **Falta de rastro entre turnos** — quando um cuidador não sabe, com certeza, se a dose das 8h já foi administrada pelo colega do turno anterior, o risco é tanto esquecer a dose quanto duplicá-la.
+- **Esquecimento do horário exato**, em meio à rotina de vários moradores com medicações diferentes.
+- **Dificuldade para ler bulas e rótulos**, sobretudo por parte de idosos com baixa visão que tentam administrar o próprio remédio.
+- **Confusão ao lidar com múltiplos medicamentos** por morador, cada um com dosagem e horário próprios.
 
-O ponto crítico não é apenas lembrar o horário: é a **falta de rastro**. Em turnos com troca de cuidadores, ninguém sabe com certeza se a dose das 8h já foi administrada, o que gera tanto dose duplicada quanto dose esquecida.
+O ponto mais crítico não é só lembrar o horário — é a **falta de um registro visível e confiável**, compartilhado entre quem cuida do mesmo morador em turnos diferentes.
 
 ## A solução
 
@@ -29,12 +27,11 @@ Aplicação web de página única, que funciona em celular ou computador e organ
 
 - **Painel "Agora"** — mostra, em destaque, os medicamentos que precisam ser dados no momento e os que estão atrasados.
 - **Agenda do dia por período** — manhã, tarde e noite, com contagem de quantas doses já foram registradas.
-- **Registro de administração com responsável** — ao marcar uma dose como dada, o sistema grava a hora real e o nome de quem administrou. É a resposta direta à dificuldade de 93%.
+- **Registro de administração com responsável** — ao marcar uma dose como dada, o sistema grava a hora real e o nome de quem administrou, resolvendo a falta de rastro entre turnos.
 - **Desfazer registro** — corrige lançamentos feitos por engano.
 - **Cadastro de moradores** — nome, quarto e observações de saúde (alergias, restrições).
 - **Cadastro de medicamentos** — nome, dosagem, um ou vários horários e orientação de uso.
 - **Histórico auditável** — todas as administrações, com horário previsto, horário real, medicamento e responsável, além da contagem de doses fora do horário.
-- **Cópia de segurança** — exportação e importação dos dados em texto, para transferir entre aparelhos.
 
 ### Acessibilidade
 
@@ -57,7 +54,7 @@ O público-alvo inclui pessoas idosas e cuidadores com pouca familiaridade digit
 | Hospedagem | GitHub Pages | Gratuita, adequada ao contexto das casas de apoio |
 | Arquivo único | `index.html` | Pode ser copiado para um pendrive e aberto direto |
 
-Não há framework, build ou banco de dados externo. A escolha foi deliberada: as casas de apoio visitadas não têm infraestrutura de TI nem orçamento para servidor, e a conexão é instável.
+Não há framework, build ou banco de dados externo. A escolha foi deliberada: casas de apoio costumam não ter infraestrutura de TI nem orçamento para servidor, e a conexão de internet pode ser instável.
 
 ## Como executar
 
@@ -91,7 +88,7 @@ Os dados ficam armazenados apenas no navegador do próprio aparelho. Nada é env
 
 ## Limitações conhecidas
 
-- Os dados não são sincronizados entre aparelhos automaticamente; a transferência é manual pela aba "Dados".
+- Os dados ficam salvos apenas no navegador do aparelho usado; não há sincronização automática entre aparelhos diferentes.
 - Não há controle de acesso por usuário.
 - Não emite notificações quando o aplicativo está fechado (exigiria um app nativo ou service worker com push).
 

@@ -241,7 +241,7 @@ dialog h2{margin-bottom:6px}
       <strong>Cuidar</strong>
       <span>Controle de medicamentos</span>
     </div>
-    <button class="tool" id="btnFonte" title="Aumentar ou reduzir o tamanho da letra">Letra maior</button>
+    <button class="tool" id="btnFonte" title="Aumentar ou reduzir o tamanho da letra">Aumentar fonte</button>
     <button class="tool" id="btnTema" title="Alternar entre modo claro e escuro">Modo escuro</button>
   </div>
   <nav role="tablist" aria-label="Seções">
@@ -249,7 +249,6 @@ dialog h2{margin-bottom:6px}
     <button role="tab" data-aba="moradores" aria-selected="false">Moradores</button>
     <button role="tab" data-aba="medicamentos" aria-selected="false">Medicamentos</button>
     <button role="tab" data-aba="historico" aria-selected="false">Histórico</button>
-    <button role="tab" data-aba="dados" aria-selected="false">Dados</button>
   </nav>
 </header>
 
@@ -402,8 +401,7 @@ function render(){
   if(estado.aba === "hoje")             app.innerHTML = viewHoje();
   else if(estado.aba === "moradores")   app.innerHTML = viewMoradores();
   else if(estado.aba === "medicamentos")app.innerHTML = viewMedicamentos();
-  else if(estado.aba === "historico")   app.innerHTML = viewHistorico();
-  else                                  app.innerHTML = viewDados();
+  else                                  app.innerHTML = viewHistorico();
   window.scrollTo(0,0);
 }
 
@@ -595,33 +593,8 @@ function viewHistorico(){
   return html + '</section>' + rodape();
 }
 
-/* ---------- Dados ---------- */
-function viewDados(){
-  var backup = JSON.stringify({
-    moradores: estado.moradores,
-    medicamentos: estado.medicamentos,
-    registros: estado.registros,
-    cuidador: estado.cuidador
-  }, null, 2);
-
-  return '<section class="card"><h2>Cópia de segurança</h2>'
-    + '<p class="dica">As informações ficam guardadas apenas neste navegador. Para levar os dados para outro aparelho, copie o texto abaixo e cole no campo do outro dispositivo.</p>'
-    + '<label><span>Dados atuais</span><textarea id="dSaida" rows="8" readonly>' + esc(backup) + '</textarea></label>'
-    + '<div class="acoes"><button class="btn btn-sec" data-acao="copiar">Copiar dados</button></div>'
-    + '</section>'
-    + '<section class="card"><h2>Restaurar dados</h2>'
-    + '<label><span>Cole aqui a cópia de segurança</span><textarea id="dEntrada" rows="6" placeholder="Cole o texto copiado do outro aparelho"></textarea></label>'
-    + '<div class="acoes"><button class="btn" data-acao="restaurar">Restaurar</button></div>'
-    + '</section>'
-    + '<section class="card"><h2>Apagar tudo</h2>'
-    + '<p class="dica">Remove moradores, medicamentos e histórico deste navegador. Não há como desfazer.</p>'
-    + '<div class="acoes"><button class="btn btn-sec btn-perigo" data-acao="limpar">Apagar todos os dados</button></div>'
-    + '</section>' + rodape();
-}
-
 function rodape(){
-  return '<p class="rodape">Cuidar — projeto de extensão universitária<br>'
-    + 'Tecnologia Aplicada à Inclusão Digital · ODS 03: Saúde e bem-estar<br>'
+  return '<p class="rodape">Cuidar - controle de medicamentos<br>'
     + 'Este sistema organiza horários e registros. Ele não substitui a orientação de médicos ou farmacêuticos.</p>';
 }
 
@@ -725,31 +698,6 @@ app.addEventListener("click", function(e){
 
   }else if(acao === "exemplo"){
     carregarExemplo(); salvar(); render();
-
-  }else if(acao === "copiar"){
-    var saida = document.getElementById("dSaida");
-    saida.select();
-    try{ document.execCommand("copy"); alert("Dados copiados."); }
-    catch(err){ alert("Selecione o texto e copie manualmente."); }
-
-  }else if(acao === "restaurar"){
-    try{
-      var dados = JSON.parse(document.getElementById("dEntrada").value);
-      estado.moradores    = dados.moradores || [];
-      estado.medicamentos = dados.medicamentos || [];
-      estado.registros    = dados.registros || {};
-      estado.cuidador     = dados.cuidador || "";
-      salvar(); estado.aba = "hoje"; render();
-      alert("Dados restaurados.");
-    }catch(err){
-      alert("O texto colado não está em um formato válido. Copie novamente a cópia de segurança completa.");
-    }
-
-  }else if(acao === "limpar"){
-    if(confirm("Apagar todos os moradores, medicamentos e histórico deste aparelho?")){
-      estado.moradores = []; estado.medicamentos = []; estado.registros = {};
-      salvar(); render();
-    }
   }
 });
 
@@ -778,7 +726,7 @@ var passoAtual = 0;
 document.getElementById("btnFonte").addEventListener("click", function(){
   passoAtual = (passoAtual + 1) % passos.length;
   document.documentElement.style.setProperty("--step", passos[passoAtual] + "px");
-  this.textContent = passoAtual === passos.length - 1 ? "Letra normal" : "Letra maior";
+  this.textContent = passoAtual === passos.length - 1 ? "Fonte normal" : "Aumentar fonte";
   try{ localStorage.setItem("cuidar.fonte", String(passoAtual)); }catch(e){}
 });
 document.getElementById("btnTema").addEventListener("click", function(){
@@ -793,7 +741,7 @@ document.getElementById("btnTema").addEventListener("click", function(){
     if(f !== null){
       passoAtual = parseInt(f,10) || 0;
       document.documentElement.style.setProperty("--step", passos[passoAtual] + "px");
-      document.getElementById("btnFonte").textContent = passoAtual === passos.length - 1 ? "Letra normal" : "Letra maior";
+      document.getElementById("btnFonte").textContent = passoAtual === passos.length - 1 ? "Fonte normal" : "Aumentar fonte";
     }
     var t = localStorage.getItem("cuidar.tema");
     if(t){
