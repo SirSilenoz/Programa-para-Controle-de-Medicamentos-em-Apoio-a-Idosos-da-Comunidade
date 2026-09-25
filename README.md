@@ -1,7 +1,5 @@
 # Cuidar — Controle de Medicamentos para Casas de Apoio a Idosos
 
-Projeto de Extensão Universitária desenvolvido no **Centro Universitário Internacional UNINTER — Escola Superior Politécnica (ESP)**, no âmbito da disciplina *Atividade Extensionista II: Tecnologia Aplicada à Inclusão Digital — Projeto*, do curso **CST em Análise e Desenvolvimento de Sistemas**.
-
 **Autor:** João Pedro do Vale de Almeida — RU 5195747
 **ODS:** 03 — Saúde e bem-estar
 **Setor de aplicação:** casas de apoio a idosos na cidade de Salvador (BA)
