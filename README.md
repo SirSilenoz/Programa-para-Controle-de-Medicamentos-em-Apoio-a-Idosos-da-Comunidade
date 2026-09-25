@@ -45,16 +45,6 @@ O público-alvo inclui pessoas idosas e cuidadores com pouca familiaridade digit
 - Foco de teclado visível e redução de movimento respeitada.
 - Vocabulário direto, sem jargão técnico: "Marcar como dado", e não "Registrar ocorrência de administração".
 
-## Tecnologias
-
-| Item | Escolha | Motivo |
-|---|---|---|
-| Linguagens | HTML5, CSS3, JavaScript (ES5+) | Sem dependências externas |
-| Armazenamento | `localStorage` do navegador | Funciona sem internet e sem servidor |
-| Hospedagem | GitHub Pages | Gratuita, adequada ao contexto das casas de apoio |
-| Arquivo único | `index.html` | Pode ser copiado para um pendrive e aberto direto |
-
-Não há framework, build ou banco de dados externo. A escolha foi deliberada: casas de apoio costumam não ter infraestrutura de TI nem orçamento para servidor, e a conexão de internet pode ser instável.
 
 ## Como executar
 
